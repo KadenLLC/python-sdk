@@ -44,7 +44,7 @@ class Maildesk:
         """Close the underlying HTTP connection pool."""
         self._http.close()
 
-    def __enter__(self) -> "Maildesk":
+    def __enter__(self) -> Maildesk:
         return self
 
     def __exit__(self, *_args: Any) -> None:

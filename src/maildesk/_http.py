@@ -1,7 +1,7 @@
 """HTTP transport wrapping httpx.Client with Maildesk auth and error mapping."""
 from __future__ import annotations
 
-from typing import Any, Dict, Optional
+from typing import Any, Optional
 
 import httpx
 
@@ -46,7 +46,7 @@ class HttpClient:
     def close(self) -> None:
         self._client.close()
 
-    def __enter__(self) -> "HttpClient":
+    def __enter__(self) -> HttpClient:
         return self
 
     def __exit__(self, *_args: Any) -> None:
@@ -57,10 +57,10 @@ class HttpClient:
         method: str,
         path: str,
         *,
-        params: Optional[Dict[str, Any]] = None,
+        params: Optional[dict[str, Any]] = None,
         json: Any = None,
     ) -> Any:
-        clean_params: Optional[Dict[str, Any]] = None
+        clean_params: Optional[dict[str, Any]] = None
         if params is not None:
             clean_params = {k: v for k, v in params.items() if v is not None}
 

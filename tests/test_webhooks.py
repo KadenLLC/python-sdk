@@ -18,7 +18,7 @@ SECRET = "whsec_topsecret"
 
 
 def _sign(body: str, timestamp: int, secret: str = SECRET) -> str:
-    signed = f"{timestamp}.{body}".encode("utf-8")
+    signed = f"{timestamp}.{body}".encode()
     sig = hmac.new(secret.encode("utf-8"), signed, sha256).hexdigest()
     return f"t={timestamp},v1={sig}"
 

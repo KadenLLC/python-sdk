@@ -1,7 +1,9 @@
 """Contacts resource — wraps /api/subscribers."""
 from __future__ import annotations
 
-from typing import Any, Dict, Iterator, List, Optional
+import builtins
+from collections.abc import Iterator
+from typing import Any, Optional
 from urllib.parse import quote
 
 from ._http import HttpClient
@@ -38,7 +40,7 @@ class ContactsResource:
         first_name: str,
         last_name: str,
         is_confirmed: bool = False,
-        tags: Optional[List[str]] = None,
+        tags: Optional[builtins.list[str]] = None,
     ) -> Contact:
         body = {
             "email": email,
@@ -50,7 +52,7 @@ class ContactsResource:
         data = self._http.request("POST", "/api/subscribers", json=body)
         return _ContactEnvelope.model_validate(data).subscriber
 
-    def bulk_create(self, subscribers: List[Dict[str, Any]]) -> BulkContactResult:
+    def bulk_create(self, subscribers: builtins.list[dict[str, Any]]) -> BulkContactResult:
         """Create up to 100 contacts in one request.
 
         Each item in ``subscribers`` should contain: ``email``, ``first_name``,
@@ -77,9 +79,9 @@ class ContactsResource:
         *,
         first_name: Optional[str] = None,
         last_name: Optional[str] = None,
-        tags: Optional[List[str]] = None,
+        tags: Optional[builtins.list[str]] = None,
     ) -> Contact:
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if first_name is not None:
             body["firstName"] = first_name
         if last_name is not None:
@@ -100,8 +102,7 @@ class ContactsResource:
         seen = 0
         while True:
             result = self.list(page=page, limit=limit)
-            for contact in result.subscribers:
-                yield contact
+            yield from result.subscribers
             seen += len(result.subscribers)
             if not result.subscribers or seen >= result.total:
                 return

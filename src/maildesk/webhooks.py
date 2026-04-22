@@ -99,7 +99,7 @@ def verify_webhook(
             )
 
     body_bytes = raw_body.encode("utf-8") if isinstance(raw_body, str) else raw_body
-    signed_payload = f"{timestamp}.".encode("utf-8") + body_bytes
+    signed_payload = f"{timestamp}.".encode() + body_bytes
     expected = hmac.new(secret.encode("utf-8"), signed_payload, sha256).hexdigest()
 
     if not hmac.compare_digest(expected, v1):

@@ -1,7 +1,8 @@
 """Tags resource — wraps /api/tags."""
 from __future__ import annotations
 
-from typing import Any, Dict, Iterator, Optional
+from collections.abc import Iterator
+from typing import Any, Optional
 from urllib.parse import quote
 
 from ._http import HttpClient
@@ -25,7 +26,7 @@ class TagsResource:
         return _TagEnvelope.model_validate(data).tag
 
     def create(self, *, name: str, description: Optional[str] = None) -> Tag:
-        body: Dict[str, Any] = {"name": name}
+        body: dict[str, Any] = {"name": name}
         if description is not None:
             body["description"] = description
         data = self._http.request("POST", "/api/tags", json=body)
@@ -38,7 +39,7 @@ class TagsResource:
         name: Optional[str] = None,
         description: Optional[str] = None,
     ) -> Tag:
-        body: Dict[str, Any] = {}
+        body: dict[str, Any] = {}
         if name is not None:
             body["name"] = name
         if description is not None:
@@ -54,8 +55,7 @@ class TagsResource:
         seen = 0
         while True:
             result = self.list(page=page, limit=limit)
-            for tag in result.tags:
-                yield tag
+            yield from result.tags
             seen += len(result.tags)
             if not result.tags or seen >= result.total:
                 return

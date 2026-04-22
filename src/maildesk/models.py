@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from enum import Enum
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -30,7 +30,7 @@ class Contact(_BaseModel):
     first_name: str = Field(alias="firstName")
     last_name: str = Field(alias="lastName")
     status: SubscriptionStatus
-    tags: List[str] = Field(default_factory=list)
+    tags: list[str] = Field(default_factory=list)
     created_at: str = Field(alias="createdAt")
 
 
@@ -48,18 +48,18 @@ class BulkContactFailure(_BaseModel):
 
 
 class BulkContactResult(_BaseModel):
-    failed: List[BulkContactFailure] = Field(default_factory=list)
+    failed: list[BulkContactFailure] = Field(default_factory=list)
 
 
 class PaginatedContacts(_BaseModel):
-    subscribers: List[Contact]
+    subscribers: list[Contact]
     total: int
     page: int
     limit: int
 
 
 class PaginatedTags(_BaseModel):
-    tags: List[Tag]
+    tags: list[Tag]
     total: int
     page: int
     limit: int
