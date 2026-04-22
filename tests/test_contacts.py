@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from maildesk import BulkContactFailureReason, NotFoundError, SubscriptionStatus
+from maildeskio import BulkContactFailureReason, NotFoundError, SubscriptionStatus
 
 
 def test_list_sends_pagination_and_auth(httpx_mock, client, base_url, api_key, contact_fixture):

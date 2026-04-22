@@ -4,7 +4,7 @@ import json
 
 import pytest
 
-from maildesk import ConflictError
+from maildeskio import ConflictError
 
 
 def test_list(httpx_mock, client, base_url, tag_fixture):

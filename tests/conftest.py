@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from maildesk import Maildesk
+from maildeskio import Maildesk
 
 BASE_URL = "https://api.maildesk.test"
 API_KEY = "sk_test_123"

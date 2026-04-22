@@ -7,7 +7,7 @@ from hashlib import sha256
 
 import pytest
 
-from maildesk import (
+from maildeskio import (
     InvalidSignatureError,
     StaleWebhookError,
     WebhookEventType,

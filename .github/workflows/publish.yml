@@ -6,7 +6,7 @@ name: Publish to PyPI
 #   2. git tag v0.1.0 && git push --tags
 #
 # Uses PyPI Trusted Publishing (OIDC) — no API token needed. One-time setup:
-#   1. Create/claim the `maildesk` project on pypi.org (first release may need a
+#   1. Create/claim the `maildeskio` project on pypi.org (first release may need a
 #      manual upload or project reservation).
 #   2. PyPI → project → Publishing → Add trusted publisher:
 #        - Owner: <your-github-org-or-user>

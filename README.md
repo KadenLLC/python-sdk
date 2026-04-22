@@ -1,4 +1,4 @@
-# maildesk
+# maildeskio
 
 Official Python SDK for the [Maildesk](https://maildesk.io) API. Typed, `mypy --strict` Python 3.9+.
 
@@ -13,13 +13,13 @@ Built on [httpx](https://www.python-httpx.org/) and [Pydantic v2](https://docs.p
 ## Install
 
 ```bash
-pip install maildesk
+pip install maildeskio
 ```
 
 ## Quick start
 
 ```python
-from maildesk import Maildesk
+from maildeskio import Maildesk
 
 client = Maildesk(api_key="sk_live_...")
 
@@ -89,7 +89,7 @@ for c in client.contacts.list_all(limit=100):
 `bulk_create` accepts up to **100 contacts per call** and returns a result with a `failed` list giving per-item reasons. A fully successful batch has an empty `failed` list.
 
 ```python
-from maildesk import BulkContactFailureReason
+from maildeskio import BulkContactFailureReason
 
 result = client.contacts.bulk_create([
     {"email": "a@example.com", "first_name": "A", "last_name": "Z"},
@@ -136,7 +136,7 @@ Maildesk signs every outbound webhook with HMAC-SHA256 using your API secret. Us
 import os
 from fastapi import FastAPI, Request, HTTPException
 
-from maildesk import verify_webhook, InvalidSignatureError, StaleWebhookError, WebhookEventType
+from maildeskio import verify_webhook, InvalidSignatureError, StaleWebhookError, WebhookEventType
 
 app = FastAPI()
 SECRET = os.environ["MAILDESK_WEBHOOK_SECRET"]
@@ -165,7 +165,7 @@ async def maildesk_webhook(request: Request):
 
 ```python
 from flask import Flask, request, abort
-from maildesk import verify_webhook, InvalidSignatureError, StaleWebhookError
+from maildeskio import verify_webhook, InvalidSignatureError, StaleWebhookError
 
 app = Flask(__name__)
 
@@ -225,7 +225,7 @@ All SDK errors inherit from `MaildeskError` and carry `status_code`, `body`, and
 | `StaleWebhookError`     | webhook timestamp outside tolerance window |
 
 ```python
-from maildesk import RateLimitError
+from maildeskio import RateLimitError
 import time
 
 try:
